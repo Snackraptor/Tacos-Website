@@ -1,5 +1,6 @@
 <?php
 
+//added db cred to gitignore
 //local constants
 define("DB_SERVER", "172.31.22.43");
 define("DB_USER", "Lionel200390096");
