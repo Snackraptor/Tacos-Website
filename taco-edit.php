@@ -32,14 +32,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $cmd -> bindParam(':filling', $filling, PDO::PARAM_STR, 20);
     $cmd -> bindParam(':salsa', $salsa, PDO::PARAM_STR, 35);
     $cmd -> bindParam(':tortilla', $tortilla, PDO::PARAM_STR, 30);
-    $cmd -> bindParam(':taco_id', $id, PDO::PARAM_INT);
+    $cmd -> bindParam(':id', $id, PDO::PARAM_INT);
 
       // execute the command
       $cmd -> execute();
 
-      //disconnect from the db
-      $conn = null;
-
+      header("Location: tacos-list.php");
     
     //Else if (GET)
 } else if($_SERVER['REQUEST_METHOD'] == 'GET'){

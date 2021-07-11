@@ -30,6 +30,7 @@ function db_queryOne($sql, $conn) {
 function db_connect() {
 
     $conn = new PDO('mysql:host=' . DB_SERVER . ';dbname=' . DB_USER, DB_NAME, DB_PASS);
+    $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $conn;
 
 }

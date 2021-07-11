@@ -41,7 +41,10 @@
 
                         <ul class="navbar-nav d-flex">
                             <li class="nav-item">
-                                <button class="btn btn-secondary btn-lg">Exit <i class="bi bi-x-circle"></i></button>
+                                <a href="taco-register.php">
+                                    <button class="btn btn-primary btn-lg">Login <i
+                                            class="bi bi-caret-left-square"></i></button>
+                                </a>
                             </li>
                         </ul>
                     </div>

@@ -11,6 +11,8 @@ $conn = db_connect();
 include_once 'shared/top-taco.php';
 
 //build a sql query
+
+//SELECT * FROM tacos
 $sql = "SELECT * FROM tacos";
 $tacos = db_queryAll($sql, $conn);
 
