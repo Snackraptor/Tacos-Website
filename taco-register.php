@@ -38,7 +38,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $conn = null;
 
     //redirect to login page
-    header("Location: login.php");
+    header("Location: taco-login.php");
     exit;
     }
 
