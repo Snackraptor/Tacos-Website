@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             <div class="align-self-center">
 
                 <h1 class="text-center fs-5 py-3">ACCOUNT LOGIN</h1>
-                <form method="POST" class="row">
+                <form novalidate method="POST" class="row">
                     <div class="row">
                         <div class="form-floating mb-4">
                             <input type="email" required autocomplete="email" autofocus id="email"
