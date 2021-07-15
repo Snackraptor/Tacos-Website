@@ -1,5 +1,9 @@
 <?php
 
+session_start();
+require_once 'taco-validations.php';
+require_login();
+
 //connect to db
 require_once 'taco-database.php';
 $conn = db_connect();
@@ -55,20 +59,20 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
                     name="salsa">
             </div>
         </div>
-</div>
 
+        <div class="row mb-4">
+            <label class="col-2 col-form-label fs-4" for="tortilla">Tortilla Type</label>
+            <div class="col-10">
+                <input readonly class="form-control form-control-lg" value="<?php echo $tortilla; ?>" type="text"
+                    name="tortilla">
+            </div>
+        </div>
 
-<div class="row mb-4">
-    <label class="col-2 col-form-label fs-4" for="tortilla">Tortilla Type</label>
-    <div class="col-10">
-        <input readonly class="form-control form-control-lg" value="<?php echo $tortilla; ?>" type="text"
-            name="tortilla">
-    </div>
-</div>
-
-<div class="d-grid">
-    <input readonly class="form-control form-control-lg" value="<?php echo $id; ?>" type="hidden" name="taco_id">
-    <button class="btn btn-danger btn-lg">Delete forever</button>
+        <div class="d-grid">
+            <input readonly class="form-control form-control-lg" value="<?php echo $id; ?>" type="hidden"
+                name="taco_id">
+            <button class="btn btn-danger btn-lg">Delete forever</button>
+        </div>
 </div>
 
 <?php

@@ -1,5 +1,16 @@
 <?php
 
+function is_logged_in(){
+    return isset($_SESSION['user_id']);
+}
+
+function require_login(){
+    if(!is_logged_in()) {
+        header("Location:taco-login.php");
+        exit;
+    }
+}
+
 function validate_registration($user, $conn) {
     $errors = [];
 

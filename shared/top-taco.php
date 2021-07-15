@@ -34,18 +34,27 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="tacos-list.php">Taco Menu</a>
                             </li>
+                            <?php if(is_logged_in()) { ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="tacos.php">Add Custom Tacos</a>
                             </li>
+                            <?php } ?>
                         </ul>
 
                         <ul class="navbar-nav d-flex">
+                        <?php if(is_logged_in()) { ?>
                             <li class="nav-item">
-                                <a href="taco-register.php">
-                                    <button class="btn btn-primary btn-lg">Login <i
-                                            class="bi bi-caret-left-square"></i></button>
-                                </a>
+                                    <a class="btn btn-primary btn-lg" href="taco-logout.php">Logout <i
+                                            class="bi bi-caret-left-square"></i></a>
                             </li>
+                            <?php } else { ?>
+                                <li class="nav-item">
+                                <a class="nav-link" href="taco-login.php">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="taco-register.php">Register</a>
+                            </li>
+                            <?php }  ?>
                         </ul>
                     </div>
                 </div>

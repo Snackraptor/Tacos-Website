@@ -1,5 +1,8 @@
 <?php
 
+session_start();
+require_once 'taco-validations.php';
+
 //connect to db
 require_once 'taco-database.php';
 $conn = db_connect();
@@ -11,8 +14,6 @@ $conn = db_connect();
 include_once 'shared/top-taco.php';
 
 //build a sql query
-
-//SELECT * FROM tacos
 $sql = "SELECT * FROM tacos";
 $tacos = db_queryAll($sql, $conn);
 
@@ -25,8 +26,10 @@ $tacos = db_queryAll($sql, $conn);
             <th scope="col">Filling</th>
             <th scope="col">Salsa</th>
             <th scope="col">Tortilla</th>
+            <?php if(is_logged_in()) { ?>
             <th scope="col" class="col-1">Edit</th>
             <th scope="col" class="col-1">Delete</th>
+            <?php } ?>
         </tr>
     </thead>
     <tbody>
@@ -37,12 +40,14 @@ $tacos = db_queryAll($sql, $conn);
             <td><?php echo $taco['filling']; ?></td>
             <td><?php echo $taco['salsa']; ?></td>
             <td><?php echo $taco['tortilla']; ?></td>
-            
+            <?php if(is_logged_in()) { ?>
             <td><a href="taco-edit.php?taco_id=<?php echo $taco['taco_id']; ?>" class="btn btn-info">Edit <i
-                        class="bi bi-pencil-square"></i></a></td>
-
-            <td><a href="tacos-delete.php?taco_id=<?php echo $taco['taco_id']; ?>" class="btn btn-danger"><span class="visually-hidden">Delete</span> <i
-                        class="bi bi-trash"></i></a></td>
+                        class="bi bi-pencil-square"></i></a>
+            </td>
+            <td><a href="tacos-delete.php?taco_id=<?php echo $taco['taco_id']; ?>" class="btn btn-danger"><span
+                        class="visually-hidden">Delete</span> <i class="bi bi-trash"></i></a>
+            </td>
+            <?php } ?>
         </tr>
         <?php } ?>
     </tbody>

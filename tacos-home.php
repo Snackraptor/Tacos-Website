@@ -1,5 +1,9 @@
 <?php
 
+session_start();
+require_once 'taco-validations.php';
+require_login();
+
 //connect to db
 require_once 'taco-database.php';
 $conn = db_connect();
