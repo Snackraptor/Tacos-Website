@@ -26,7 +26,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     $salsa = $tacos['salsa'];
     $tortilla = $tacos['tortilla'];
     
-
+    $title_tag = "Delete Taco";
     include_once 'shared/top-taco.php';
 
 ?>

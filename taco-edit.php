@@ -11,21 +11,34 @@ $conn = db_connect();
 ?>
 
 <?php
-
+$title_tag = "Edit Taco";
 include_once 'shared/top-taco.php';
 
-//if (POST)
+$errors = [];
 
+//if (POST)
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     //Saving inputs into variables
     $title = trim(filter_var($_POST['title'], FILTER_SANITIZE_STRING));
     $filling = trim(filter_var($_POST['filling'], FILTER_SANITIZE_STRING));
-    $salsa = $_POST['salsa'] ?? '';
+    $salsa = trim(filter_var($_POST['salsa'], FILTER_SANITIZE_STRING));
     $tortilla = trim(filter_var($_POST['tortilla'], FILTER_SANITIZE_STRING));
     $id = trim(filter_var($_POST['taco_id'], FILTER_SANITIZE_NUMBER_INT));
 
+    //Error checking
+    $edit_taco = [];
+    $edit_taco['title'] = $title;
+    $edit_taco['filling'] = $filling;
+    $edit_taco['salsa'] = $salsa;
+    $edit_taco['tortilla'] = $tortilla;
+    
+    //Validating the inputs
+    $errors = validate_taco($edit_taco);
+
     //Running update statement
+    if (empty($errors)){
+    try{
     $sql = "UPDATE tacos SET title=:title,";
     $sql .= "filling=:filling, salsa=:salsa, tortilla=:tortilla ";
     $sql .= "WHERE taco_id=:id";
@@ -42,6 +55,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
       $cmd -> execute();
 
       header("Location: tacos-list.php");
+      exit;
+    } catch(Exception $e){
+        header("Location: taco-error.php");
+        exit;
+    }
+}
     
     //Else if (GET)
 } else if($_SERVER['REQUEST_METHOD'] == 'GET'){
@@ -59,17 +78,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 ?>
 
-<!-- value="<?php// echo $title; ?>" -->
-
 <h1 class="text-center mt-5">Edit Taco</h1>
 
 <div class="row mt-5 justify-content-center">
-    <form class="col-6 mb-5" action="taco-edit.php" method="POST">
+    <form novalidate class="col-6 mb-5" action="taco-edit.php" method="POST">
         <div class="row mb-4">
             <label class="col-2 col-form-label fs-4" for="title">Taco Name</label>
             <div class="col-10">
-                <input autofocus required class="form-control form-control-lg" value="<?php echo $title; ?>" type="text"
+                <input autofocus required class="<?= (isset($errors['title']) ? 'is-invalid ' : ''); ?> form-control form-control-lg" value="<?= $title ?? ''; ?>" type="text"
                     name="title">
+                    <p class="text-danger"><?= $errors['title'] ?? ''; ?></p>
             </div>
         </div>
 
@@ -98,29 +116,29 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label class="col-2 col-form-label fs-4" for="salsa">Salsa Flavor</label>
             <div class="col-10">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="salsa" value="Mild Salsa Verde (Green)"
-                        id="flexCheckChecked" checked>
+                    <input class="form-check-input" type="radio" name="salsa" value="Mild Salsa Verde (Green)"
+                        id="flexRadioDefault2" checked>
                     <label class="form-check-label" for="salsa">
                         Mild Salsa Verde (Green)
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="salsa" value="Hot Salsa Verde (Green)"
-                        id="flexCheckDefault">
+                    <input class="form-check-input" type="radio" name="salsa" value="Hot Salsa Verde (Green)"
+                        id="flexRadioDefault">
                     <label class="form-check-label" for="salsa">
                         Hot Salsa Verde (Green)
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="salsa" value="Burning Salsa Rojo (Red)"
-                        id="flexCheckDefault">
+                    <input class="form-check-input" type="radio" name="salsa" value="Burning Salsa Rojo (Red)"
+                        id="flexRadioDefault">
                     <label class="form-check-label" for="salsa">
                         Burning Salsa Rojo (Red)
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="salsa" value="Tangy Mango Salsa (Yellow)"
-                        id="flexCheckDefault">
+                    <input class="form-check-input" type="radio" name="salsa" value="Tangy Mango Salsa (Yellow)"
+                        id="flexRadioDefault">
                     <label class="form-check-label" for="salsa">
                         Tangy Mango Salsa (Yellow)
                     </label>

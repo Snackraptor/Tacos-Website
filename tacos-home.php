@@ -11,7 +11,7 @@ $conn = db_connect();
 ?>
 
 <?php
-
+$title_tag = "Main Page";
 include_once 'shared/top-taco.php';
 
 ?>

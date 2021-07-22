@@ -8,6 +8,7 @@ require_login();
 require_once 'taco-database.php';
 $conn = db_connect();
 
+$title_tag = "Taco Error";
 include_once 'shared/top-taco.php';
 
 ?>

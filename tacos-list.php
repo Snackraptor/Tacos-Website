@@ -10,7 +10,7 @@ $conn = db_connect();
 ?>
 
 <?php
-
+$title_tag = "Taco List";
 include_once 'shared/top-taco.php';
 
 //build a sql query

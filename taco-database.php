@@ -9,6 +9,7 @@ function db_queryAll($sql, $conn) {
         $tacos = $cmd->fetchAll();
         return $tacos;
     }catch(Exception $e){
+        //mail('lionel.pineda@mygeorgian.ca', 'PDO Error', $e);
         header("Location: taco-error.php");
     }
     

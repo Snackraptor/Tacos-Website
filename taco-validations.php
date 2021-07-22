@@ -11,6 +11,28 @@ function require_login(){
     }
 }
 
+function validate_taco($tacos){
+    $errors = [];
+
+    if(empty(trim($tacos['title']))){
+        $errors['title'] = "Please enter a proper title.";
+    }
+
+    if(empty(trim($tacos['filling']))){
+        $errors['filling'] = "Please select a proper filling.";
+    }
+    
+    if(empty(trim($tacos['salsa']))){
+        $errors['salsa'] = "Please select a proper salsa";
+    }
+    
+    if(empty(trim($tacos['tortilla']))){
+        $errors['tortilla']  = "Please select a proper tortilla for your taco.";
+    }
+
+    return $errors;
+}
+
 function validate_registration($user, $conn) {
     $errors = [];
 

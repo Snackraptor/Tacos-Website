@@ -5,13 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tacos Site</title>
+    <title><?= $title_tag ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/style-two.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
 </head>
 
 <body>
@@ -42,13 +46,21 @@
                         </ul>
 
                         <ul class="navbar-nav d-flex">
-                        <?php if(is_logged_in()) { ?>
+                            <?php if(is_logged_in()) { ?>
                             <li class="nav-item">
-                                    <a class="btn btn-primary btn-lg" href="taco-logout.php">Logout <i
-                                            class="bi bi-caret-left-square"></i></a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-circle"></i> <?= $_SESSION['username']; ?>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="taco-logout.php">Logout <i
+                                                class="bi bi-box-arrow-right"></i></a></li>
+                                </ul>
+                            </li>
                             </li>
                             <?php } else { ?>
-                                <li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link" href="taco-login.php">Login</a>
                             </li>
                             <li class="nav-item">
