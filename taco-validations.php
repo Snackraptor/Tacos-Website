@@ -30,6 +30,14 @@ function validate_taco($tacos){
         $errors['tortilla']  = "Please select a proper tortilla for your taco.";
     }
 
+    if ($tacos['size'] > 1000000) {
+        $errors['photo'] = "Image must be less than 1 MB";
+    }
+    
+    if (!($tacos['type'] == 'image/jpg' || $tacos['type'] == 'image/jpeg' || $tacos['type'] == 'image/png')) {
+        $errors['photo'] = "Image format must be .jpg or .png";
+    }
+
     return $errors;
 }
 
