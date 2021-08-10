@@ -1,11 +1,11 @@
 <?php
 require_once 'db_cred.php';
 
-function db_queryAll($sql, $conn) {
+function db_queryAll($sql, $conn, $word_list = []) {
     try{
         //run query and store the results
         $cmd = $conn->prepare($sql);
-        $cmd -> execute();
+        $cmd -> execute($word_list);
         $tacos = $cmd->fetchAll();
         return $tacos;
     }catch(Exception $e){

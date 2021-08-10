@@ -67,7 +67,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         // execute the command
         $cmd -> execute();
 
-      header("Location: tacos-list.php");
+      header("Location: tacos-list.php?t=3&msg=Taco");
       exit;
     } catch(Exception $e){
         header("Location: taco-error.php");
@@ -228,7 +228,11 @@ function handleFileSelect(evt) {
 choosefile.addEventListener('change', handleFileSelect);
 </script>
 
-        <?php
+<?php
+
+$t = filter_var($_GET['t'] ?? '', FILTER_SANITIZE_STRING);
+$msg = filter_var($_GET['msg'] ?? '', FILTER_SANITIZE_STRING);
+display_toast($t, $msg);
 
 include_once 'shared/footer-taco.php';
 

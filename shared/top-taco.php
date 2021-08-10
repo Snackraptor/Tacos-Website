@@ -1,3 +1,14 @@
+<?php 
+
+$keywords = '';
+
+if(isset($_GET['k'])){
+    $keywords = filter_var($_GET['k'], FILTER_SANITIZE_STRING);
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +31,6 @@
 
 <body>
     <div class="container">
-
         <header>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
@@ -45,6 +55,13 @@
                             <?php } ?>
                         </ul>
 
+                        <!-- Search bar -->
+                        <form class="d-flex pe-5" action="tacos-list.php" method="GET">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="k" value="<?= $keywords; ?>">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+
+                        <!-- Nav bar/Login session -->
                         <ul class="navbar-nav d-flex">
                             <?php if(is_logged_in()) { ?>
                             <li class="nav-item">

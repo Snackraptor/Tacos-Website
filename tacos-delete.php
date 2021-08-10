@@ -88,7 +88,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     $cmd = $conn->prepare($sql);
     $cmd -> execute();
     
-    header("Location: tacos-list.php");
+    header("Location: tacos-list.php?t=2&msg=Taco");
 }
 
 ?>

@@ -72,3 +72,41 @@ function validate_registration($user, $conn) {
         
     return $errors;
 }
+
+function display_toast($t, $msg){
+
+    if (!($t && $msg)){
+        return;
+    }
+
+    $msgs = [];
+    $msgs['1'] = "Successfully Added";
+    $msgs['2'] = "Successfully Deleted";
+    $msgs['3'] = "Successfully Edited";
+
+    echo <<<EOL
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-dark text-light">
+                
+                <strong class="me-auto">$msgs[$t]</strong>
+                <small>11 mins ago</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body bg-dark text-light">
+                $msg
+            </div>
+        </div>
+    </div>
+    <script>
+    window.addEventListener('DOMContentLoaded', () => {
+        var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+        var toastList = toastElList.map(function(toastEl) {
+            return new bootstrap.Toast(toastEl)
+    });
+    
+    toastList.forEach(toast => toast.show())
+    });
+    </script>
+    EOL;
+}

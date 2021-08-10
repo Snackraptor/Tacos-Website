@@ -17,9 +17,34 @@ include_once 'shared/top-taco.php';
 $sql = "SELECT * FROM tacos";
 $tacos = db_queryAll($sql, $conn);
 
+//Store seperate words used for searching
+$word_list= [];
+
+//Select from games WHERE title matches search
+if(!empty($keywords)){
+    $sql .= " WHERE ";
+
+    //split the multiple keywords into an array using php explode
+    $word_list = explode(" ", $keywords);
+
+    //loop through the word list array, and add each word to the where clause
+    foreach($word_list as $key => $word){
+        $word_list[$key] = "%" . $word . "%";
+
+        //but for the first word, omit the word OR
+        if ($key == 0){
+            $sql .= " title LIKE ?";
+        } else {
+            $sql .= " OR title like ?";
+        }
+    }
+}
+
+$tacos = db_queryAll($sql, $conn, $word_list);
+
 ?>
 
-<table class="table table-dark table-bordered border-secondary fs-5 mt-4">
+<table class="sortable table table-dark table-bordered border-secondary fs-5 mt-4">
     <thead>
         <tr>
             <th scope="col">Taco Name</th>
@@ -27,8 +52,8 @@ $tacos = db_queryAll($sql, $conn);
             <th scope="col">Salsa</th>
             <th scope="col">Tortilla</th>
             <?php if(is_logged_in()) { ?>
-            <th scope="col" class="col-1">Edit</th>
-            <th scope="col" class="col-1">Delete</th>
+            <th scope="col" class="col-1 sorttable_nosort">Edit</th>
+            <th scope="col" class="col-1 sorttable_nosort">Delete</th>
             <?php } ?>
         </tr>
     </thead>
@@ -56,6 +81,9 @@ $tacos = db_queryAll($sql, $conn);
 
 <?php
 
+$t = filter_var($_GET['t'] ?? '', FILTER_SANITIZE_STRING);
+$msg = filter_var($_GET['msg'] ?? '', FILTER_SANITIZE_STRING);
+display_toast($t, $msg);
 include_once 'shared/footer-taco.php';
 
 ?>
