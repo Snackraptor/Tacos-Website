@@ -53,6 +53,11 @@ if(isset($_GET['k'])){
                                 <a class="nav-link" href="tacos.php">Add Custom Tacos</a>
                             </li>
                             <?php } ?>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="store.php">Store</a>
+                            </li>
+                            
                         </ul>
 
                         <!-- Search bar -->
